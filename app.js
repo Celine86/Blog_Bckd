@@ -1,8 +1,17 @@
-require('dotenv').config();
 const express = require('express'); 
 const helmet = require('helmet');
 const app = express();
 const path = require("path");
+
+
+const db = require("./models/index")
+db.sequelize.sync().then(function () {
+  require("./seeders/firstuser");
+})
+
+// Sync Tables and force modifications 
+// Note, set force to true if error "Too many keys specified; max 64 keys allowed"
+//db.sequelize.sync({ alter: true, force: false })
 
 app.use(helmet());
 
