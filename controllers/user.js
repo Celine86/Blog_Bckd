@@ -2,16 +2,7 @@ const db = require("../models");
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 require('dotenv').config();
-const nodemailer = require('nodemailer');
-
-const transporter = nodemailer.createTransport({
-    host: process.env.MAIL_HOST,
-    port: 587,
-    auth: {
-        user: process.env.MAIL_ACCOUNT,
-        pass: process.env.MAIL_PSWD
-    }
-})
+const { sendEmail } = require('../middleware/sendmail');
 
 exports.login = async (req, res, next) => {
   try {
@@ -32,19 +23,12 @@ exports.login = async (req, res, next) => {
         user.otpcreated = Date.now();
         user.otpexpires = expires;
         await user.save({ fields: ["otp", "otpcreated", "otpexpires"],});
-          const mailOptions = {
-          from: process.env.MAIL_ACCOUNT,
-          to: email,
-          subject: "OTP",
-          text: `Ton code OTP : ${this.otpCode}.`,
-        };
-        transporter.sendMail(mailOptions, (error, _info) => {
-          if (error) {
-            res.status(500).send({ message: 'Le code otp n\'a pas pu être envoyé' });
-          } else {
-            res.status(200).send({ message: 'Code OTP envoyé' });
+        try {
+          await sendEmail(email, 'OTP', `Ton code OTP : ${this.otpCode}.`);
+          return res.status(200).send({ message: `Envoi du code OTP sur ${email}` });
+          } catch (error) {
+            return res.status(500).send({ message: `Le code OTP n'a pas pu être envoyé` });
           }
-        });
       } 
     } 
   } catch (error) {
