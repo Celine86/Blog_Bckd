@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 require('dotenv').config();
 const { sendEmail } = require('../middleware/sendmail');
+const messages = require('../messages');
 
 exports.login = async (req, res, next) => {
   try {
@@ -10,11 +11,11 @@ exports.login = async (req, res, next) => {
       where: {email: req.body.email},
     });    
   if (user === null) {
-    return res.status(401).json({ error: "Connexion impossible, merci de vérifier votre login" });
+    return res.status(401).json({ error: messages.USER_CONNEXIONIMPOSSIBLE });
     } else {
       const hashed = await bcrypt.compare(req.body.password, user.password);
       if (!hashed) {
-        return res.status(401).json({ error: "Le mot de passe est incorrect !" });
+        return res.status(401).json({ error: messages.USER_MDPINCORRECT });
       } else {
         const { email } = req.body;
         this.otpCode = Math.floor(100000 + Math.random() * 900000);
@@ -24,15 +25,15 @@ exports.login = async (req, res, next) => {
         user.otpexpires = expires;
         await user.save({ fields: ["otp", "otpcreated", "otpexpires"],});
         try {
-          await sendEmail(email, 'OTP', `Ton code OTP : ${this.otpCode}.`);
-          return res.status(200).send({ message: `Envoi du code OTP sur ${email}` });
+          await sendEmail(email, messages.OTP_TITLE, messages.OTP_MSG + this.otpCode);
+          return res.status(200).send({ message: messages.OTP_SENDMAILMSG + email });
           } catch (error) {
-            return res.status(500).send({ message: `Le code OTP n'a pas pu être envoyé` });
+            return res.status(500).send({ message: messages.OTP_NOTSENT });
           }
       } 
     } 
   } catch (error) {
-    return res.status(500).json({ error: "Erreur Serveur" });
+    return res.status(500).json({ error: messages.SERVEUR_ERROR });
   }
 };
 
@@ -51,13 +52,13 @@ exports.verifyotp = async (req, res, next) => {
   const { otp } = req.body;
   if (otp === thisotpverify && otp!=0 && datenowtocompare > datenow) {
     res.status(200).json({
-      message: "Vous êtes connecté !",
+      message: messages.USER_CONNECTED,
       username: user.username,
       email: user.email,
       userId: user.id,
       token: jwt.sign({userId: user.id}, process.env.TOKEN, {expiresIn: '24h'}),
   })
   } else {
-    res.status(401).send({ message: 'Code OTP Invalide' });
+    res.status(401).send({ message: messages.OTP_INVALID });
   }
 };

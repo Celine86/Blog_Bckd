@@ -17,6 +17,7 @@ module.exports = (sequelize, DataTypes) => {
     title: { type: DataTypes.STRING, allowNull: false },
     content: { type: DataTypes.STRING, allowNull: false },
     createdBy: { type: DataTypes.STRING, allowNull: true },
+    isArchived: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false }
   }, {
     sequelize,
     modelName: 'Post',
