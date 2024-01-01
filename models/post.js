@@ -10,12 +10,11 @@ module.exports = (sequelize, DataTypes) => {
           allowNull: false
         }, onDelete:'CASCADE',
       })
-      models.Post.hasMany(models.Category);
     }
   };
   Post.init({
     title: { type: DataTypes.STRING, allowNull: false },
-    content: { type: DataTypes.STRING, allowNull: false },
+    content: { type: DataTypes.TEXT('long'), allowNull: false },
     createdBy: { type: DataTypes.STRING, allowNull: true },
     isArchived: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false }
   }, {

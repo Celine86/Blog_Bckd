@@ -14,8 +14,7 @@ module.exports = (sequelize, DataTypes) => {
   };
   Image.init({
     imageUrl: { type: DataTypes.STRING, allowNull: true },
-    imageTitle: { type:DataTypes.STRING, allowNull: true},
-    createdBy: { type: DataTypes.STRING, allowNull: true },
+    imageTitle: { type:DataTypes.STRING, allowNull: true}
   }, {
     sequelize,
     modelName: 'Image',

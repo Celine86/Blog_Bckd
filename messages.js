@@ -16,6 +16,15 @@ module.exports = {
     POST_ADDNOK: "Le post n'a pas pu être ajouté",
     POST_ADDMISSINGTITLEORCONTENT: "Merci de renseigner le titre et le corps du message",
     POSTS_VIEWNOK: "Aucun article à afficher",
+    POST_MODIFIED: "Le post a été modifié",
+    POST_ARCHIVED: "Le post a été archivé",
+    POST_NOPOST: "Aucun post trouvé",
+    // IMAGES
+    IMAGE_IMAGEADDED: "Image ajoutée",
+    IMAGE_PLEASEADD: "Merci de rajouter une image",
+    // CATGEROIES 
+    CATEGORY_ADDMISSINGNAMEORTYPE: "Merci d'ajouter un nom et un type de catégorie",
+    CATEGORY_ADDOK: "La catégorie a été créée",
     // SERVEUR
     SERVEUR_ERROR: "Erreur Serveur."
 }

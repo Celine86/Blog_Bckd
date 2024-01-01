@@ -28,5 +28,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/images", express.static(path.join(__dirname, "images")));
 app.use('/api/users', require('./routes/user'));
 app.use('/api/posts', require('./routes/post'));
+app.use('/api/images', require('./routes/image'));
 
 module.exports = app;
