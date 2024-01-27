@@ -18,6 +18,12 @@ function firstUser(req, res) {
               })
                 .then((account) => {
                   console.log(`Le compte ${account.username} a été créé!`)
+                  db.Post.create({
+                    title: "First Post",
+                    content: "First Post Content",
+                    createdBy: account.username,
+                    UserId: account.id
+                  })
                 })
                 .catch((error) => { 
                   console.log(error);

@@ -7,7 +7,7 @@ module.exports = {
     OTP_TITLE: "Votre code OTP",
     OTP_MSG: "Voici votre code OTP : ",
     OTP_SENDMAILMSG: "Le code OTP a été envoyé sur le mail :",
-    OTP_NOTSENT: "Le code OTP n'a pas pu être envoyé. Veuillez réessayer ultéieurement.",
+    OTP_NOTSENT: "Le code OTP n'a pas pu être envoyé. Veuillez réessayer ultérieurement.",
     OTP_INVALID: "Le code OTP n'est pas valide.",
     // AUTH 
     AUTH_NOTAUTH: "Utilisateur non authentifié",
