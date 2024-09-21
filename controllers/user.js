@@ -2,6 +2,7 @@ const db = require("../models");
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 require('dotenv').config();
+const auth = require("../middleware/auth");
 const { sendEmail } = require('../middleware/sendmail');
 const messages = require('../messages');
 
@@ -19,13 +20,13 @@ exports.login = async (req, res, next) => {
       } else {
         const { email } = req.body;
         this.otpCode = Math.floor(100000 + Math.random() * 900000);
-        const expires = new Date(Date.now() + 5*60*1000);
+        const expires = new Date(Date.now() + 30*60*1000);
         user.otp = this.otpCode;
         user.otpcreated = Date.now();
         user.otpexpires = expires;
         await user.save({ fields: ["otp", "otpcreated", "otpexpires"],});
         try {
-          await sendEmail(email, messages.OTP_TITLE, messages.OTP_MSG + this.otpCode);
+          sendEmail(email, messages.OTP_TITLE, messages.OTP_MSG + this.otpCode);
           return res.status(200).send({ message: messages.OTP_SENDMAILMSG + email });
           } catch (error) {
             return res.status(500).send({ message: messages.OTP_NOTSENT });
@@ -60,5 +61,15 @@ exports.verifyotp = async (req, res, next) => {
   })
   } else {
     res.status(401).send({ message: messages.OTP_INVALID });
+  }
+};
+
+exports.getUser = async (req, res, next) => {
+  try {
+    const userId = auth.getUserID(req);
+    await db.User.findOne({ attributes: ["id", "username", "email"], where: { id: userId } });
+    res.status(200).send({message : messages.USER_CONNECTED});
+  } catch (error) {
+    return res.status(500).json({ error: messages.SERVEUR_ERROR });
   }
 };
