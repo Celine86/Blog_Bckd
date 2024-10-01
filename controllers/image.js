@@ -21,7 +21,7 @@ exports.addImage = async (req, res, next) => {
             res.status(403).json({ message: messages.IMAGE_PLEASEADD });
         }
     } catch (error) {
-        return error
+        return res.status(500).json({ error: messages.SERVEUR_ERROR });
     }
 };
 
@@ -34,7 +34,7 @@ exports.getAllImages = async (req,res, next) => {
         res.status(200).json({ allImages });
     }
     catch (error) {
-        return error
+        return res.status(500).json({ error: messages.SERVEUR_ERROR });
     }
 };
 
@@ -47,6 +47,6 @@ exports.getOneImage = async (req,res, next) => {
         res.status(200).json({ image });
     }
     catch (error) {
-        return error
+        return res.status(500).json({ error: messages.SERVEUR_ERROR });
     }
 };

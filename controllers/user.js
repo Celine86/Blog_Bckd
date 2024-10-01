@@ -29,7 +29,7 @@ exports.login = async (req, res, next) => {
           sendEmail(email, messages.OTP_TITLE, messages.OTP_MSG + this.otpCode);
           return res.status(200).send({ message: messages.OTP_SENDMAILMSG + email });
           } catch (error) {
-            return res.status(500).send({ message: messages.OTP_NOTSENT });
+            return res.status(500).json({ message: messages.OTP_NOTSENT });
           }
       } 
     } 
@@ -60,7 +60,7 @@ exports.verifyotp = async (req, res, next) => {
       token: jwt.sign({userId: user.id}, process.env.TOKEN, {expiresIn: '24h'}),
   })
   } else {
-    res.status(401).send({ message: messages.OTP_INVALID });
+    res.status(401).json({ message: messages.OTP_INVALID });
   }
 };
 
@@ -68,7 +68,7 @@ exports.getUser = async (req, res, next) => {
   try {
     const userId = auth.getUserID(req);
     await db.User.findOne({ attributes: ["id", "username", "email"], where: { id: userId } });
-    res.status(200).send({message : messages.USER_CONNECTED});
+    res.status(200).json({message : messages.USER_CONNECTED});
   } catch (error) {
     return res.status(500).json({ error: messages.SERVEUR_ERROR });
   }
