@@ -120,6 +120,61 @@ function firstUser(req, res) {
                     createdBy: account.username,
                     UserId: account.id
                   })
+                  db.Image.create({
+                    imageUrl : `${process.env.SERVERADDRESS}defaultImages/ChatAuCrayonGris.jpeg`,
+                    imageTitle : "Chat Au Crayon Gris",
+                    UserId: account.id
+                  })
+                  db.Image.create({
+                    imageUrl : `${process.env.SERVERADDRESS}defaultImages/ChatAuCrayonGris2.jpeg`,
+                    imageTitle : "Chat Au Crayon Gris 2",
+                    UserId: account.id
+                  })
+                  db.Image.create({
+                    imageUrl : `${process.env.SERVERADDRESS}defaultImages/ChatAuCrayonGris3.jpeg`,
+                    imageTitle : "Chat Au Crayon Gris 3",
+                    UserId: account.id
+                  })
+                  db.Image.create({
+                    imageUrl : `${process.env.SERVERADDRESS}defaultImages/ChatAuCrayonGris4.jpeg`,
+                    imageTitle : "Chat Au Crayon Gris 4",
+                    UserId: account.id
+                  })
+                  db.Image.create({
+                    imageUrl : `${process.env.SERVERADDRESS}defaultImages/ChatAuCrayonGris5.jpeg`,
+                    imageTitle : "Chat Au Crayon Gris 5",
+                    UserId: account.id
+                  })
+                  db.Image.create({
+                    imageUrl : `${process.env.SERVERADDRESS}defaultImages/ChatAuCrayonGris6.jpeg`,
+                    imageTitle : "Chat Au Crayon Gris 6",
+                    UserId: account.id
+                  })
+                  db.Image.create({
+                    imageUrl : `${process.env.SERVERADDRESS}defaultImages/ChatAuCrayonGris7.jpeg`,
+                    imageTitle : "Chat Au Crayon Gris 7",
+                    UserId: account.id
+                  })
+                  db.Image.create({
+                    imageUrl : `${process.env.SERVERADDRESS}defaultImages/ChatAuCrayonGris8.jpeg`,
+                    imageTitle : "Chat Au Crayon Gris 8",
+                    UserId: account.id
+                  })
+                  db.Image.create({
+                    imageUrl : `${process.env.SERVERADDRESS}defaultImages/ChatAuCrayonGris9.jpeg`,
+                    imageTitle : "Chat Au Crayon Gris 9",
+                    UserId: account.id
+                  })
+                  db.Image.create({
+                    imageUrl : `${process.env.SERVERADDRESS}defaultImages/ChatAuCrayonGris10.jpeg`,
+                    imageTitle : "Chat Au Crayon Gris 10",
+                    UserId: account.id
+                  })
+                  db.Image.create({
+                    imageUrl : `${process.env.SERVERADDRESS}defaultImages/ChatAuCrayonGris11.jpeg`,
+                    imageTitle : "Chat Au Crayon Gris 11",
+                    UserId: account.id
+                  })
                 })
                 .catch((error) => { 
                   console.log(error);
