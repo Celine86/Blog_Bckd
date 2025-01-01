@@ -21,7 +21,7 @@ module.exports = {
     POST_NOPOST: "Aucun post trouvé",
     // IMAGES
     IMAGE_IMAGEADDED: "Image ajoutée",
-    IMAGE_PLEASEADD: "Merci de rajouter une image",
+    IMAGE_PLEASEADD: "Merci de rajouter une image avec un titre",
     // CATGEROIES 
     CATEGORY_ADDMISSINGNAMEORTYPE: "Merci d'ajouter un nom et un type de catégorie",
     CATEGORY_ADDOK: "La catégorie a été créée",

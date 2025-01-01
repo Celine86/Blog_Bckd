@@ -9,7 +9,7 @@ exports.addImage = async (req, res, next) => {
         let imageUrl = "";
         const userId = auth.getUserID(req);
         const user = await db.User.findOne({ where: { id: userId } });
-        if (req.file) {
+        if (req.file && req.body.title) {
             imageUrl = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`;
             const myImage = await db.Image.create({
                 UserId: user.id,
